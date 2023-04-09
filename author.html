@@ -9,18 +9,38 @@
 </head>
 <body>
 <div align="center">
-    <table border="1" cellpadding="5">
-        <thead>
-        <tr>
-            <th>ID</th>
-            <th>Author Name</th>
-        </tr>
-        </thead>
-        <tbody id="authorList">
-        </tbody>
-    </table>
+
+    <div>
+        <form>
+            <table>
+                <tr>
+                    <td>Author Name</td>
+                    <td><input type="text" id="authorName" name="authorName" placeholder="Author Name"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <button type="submit" onclick="addAuthor()">Add</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+
+    <div>
+        <table border="1" cellpadding="5">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Author Name</th>
+            </tr>
+            </thead>
+            <tbody id="authorList">
+            </tbody>
+        </table>
+    </div>
 </div>
-<script src="js/author.js">
+<script src="js/bookMng.js">
 </script>
 </body>
 </html>

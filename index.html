@@ -6,6 +6,53 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 </head>
 <body>
-
+<div align="center">
+    <div>
+        <form>
+            <table>
+                <tr>
+                    <td>Book ID</td>
+                    <td><input type="text" id="bookId" name="bookId" placeholder="Book ID"></td>
+                </tr>
+                <tr>
+                    <td>Book Name</td>
+                    <td><input type="text" id="bookName" name="bookName" placeholder="Book ID"></td>
+                </tr>
+                <tr>
+                    <td>Author</td>
+                    <td>
+                        <select id="authorId" name="authorId">
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Price</td>
+                    <td><input type="text" id="price" name="price" placeholder="Price"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <button type="submit" onclick="addBook()">Add</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+    <div>
+        <table border="1" cellpadding="5">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Book ID</th>
+                <th>Book Name</th>
+                <th>Author</th>
+                <th>Price</th>
+            </tr>
+            </thead>
+            <tbody id="bookList"></tbody>
+        </table>
+    </div>
+</div>
+<script src="js/bookMng.js"></script>
 </body>
 </html>
