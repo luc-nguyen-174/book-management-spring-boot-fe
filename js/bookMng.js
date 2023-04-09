@@ -1,5 +1,3 @@
-
-
 function getAllAuthors() {
     $.ajax({
         type: "GET",
@@ -13,6 +11,7 @@ function getAllAuthors() {
                     <td>${authors[i].id}</td>
                     <td>${authors[i].authorName}</td>
                     <td><button onclick="deleteAuthorById(${authors[i].id})">DEL</button></td>
+                    <td><button onclick="forwardToAuthor(${authors[i].id})">edit</button></td>
                 </tr>
                 `
             }
@@ -54,6 +53,61 @@ function deleteAuthorById(id) {
     })
 }
 
+function forwardToAuthor(id) {
+    $.ajax(
+        {
+            type: "GET",
+            url: "http://localhost:8080/authors/" + id,
+            success: function (authors) {
+                window.location.href="authorEdit.html?id=" + id;
+            }
+        }
+    )
+}
+function showAuthor() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const authorId = urlParams.get("id");
+    $.ajax({
+        type: "GET",
+        url: "http://localhost:8080/authors/" + authorId,
+        success: function (authors) {
+            // Hiển thị thông tin khách hàng trên trang view.html
+            const id = authors.id;
+            const authorName = authors.authorName;
+            document.getElementById("id").innerHTML = id;
+            document.getElementById("authorName").innerHTML = authorName;
+            let formAuthor = `<input type="text" id="authorName" name="authorName" value="${authors.authorName}">
+                                <button type="submit" onclick="editAuthor(${authors.id})">Save</button>`
+            document.getElementById("formAuthor").innerHTML = formAuthor;
+        }
+    });
+}
+
+function editAuthor(id) {
+    let authorName = document.getElementById("authorName").value;
+    let editedAuthor = {
+        "authorName": authorName
+    }
+    $.ajax({
+        headers : {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        },
+        data : JSON.stringify(editedAuthor),
+        type : "PUT",
+        url : " http://localhost:8080/authors/edit/" + id,
+        success : function() {
+            alert("Author edited");
+        }
+    })
+}
+
+
+
+
+
+
+//----------------------------------------------------------------//
 function getBookList() {
     $.ajax({
         type: "GET",
@@ -70,6 +124,7 @@ function getBookList() {
                     <td>${books[i].bookName}</td>
                     <td>${books[i].author.authorName}</td>
                     <td>${books[i].price}</td>
+                    <td><button onclick="deleteBookById(${books[i].id})">Del</button></td>
                 </tr>
                 `
             }
@@ -102,7 +157,7 @@ function addBook() {
         data : JSON.stringify(newBook),
         type : "POST",
         url : "http://localhost:8080/books/create",
-        success : function() {
+        success : function(data) {
             alert("Book created");
             getBookList();
         }
@@ -128,3 +183,25 @@ function getAuthorOption() {
     })
 }
 getAuthorOption();
+
+function deleteBookById(id) {
+    $.ajax({
+        type: "DELETE",
+        url: "http://localhost:8080/books/delete/" + id,
+        success : function() {
+            alert("Deleted");
+            getBookList();
+        }
+    })
+}
+
+function getTotalPrice() {
+    $.ajax({
+        type: "GET",
+        url: "http://localhost:8080/books/total-price",
+        success: function(totalPrice) {
+            document.getElementById("totalPrice").innerHTML = "Total Price: "+totalPrice;
+        }
+    })
+}
+getTotalPrice();

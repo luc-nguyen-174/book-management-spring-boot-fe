@@ -8,8 +8,13 @@
 <body>
 <div align="center">
     <div>
+        <h2>Search</h2>
+    </div>
+
+    <div>
         <form>
-            <table>
+            <h2>Add New Book</h2>
+            <table border="1" cellpadding="5">
                 <tr>
                     <td>Book ID</td>
                     <td><input type="text" id="bookId" name="bookId" placeholder="Book ID"></td>
@@ -38,7 +43,9 @@
             </table>
         </form>
     </div>
+
     <div>
+        <h2>List Book</h2>
         <table border="1" cellpadding="5">
             <thead>
             <tr>
@@ -47,10 +54,15 @@
                 <th>Book Name</th>
                 <th>Author</th>
                 <th>Price</th>
+                <th>Action</th>
             </tr>
             </thead>
             <tbody id="bookList"></tbody>
         </table>
+    </div>
+    <div>
+        <h2>Total Price:</h2>
+        <p id="totalPrice"></p>
     </div>
 </div>
 <script src="js/bookMng.js"></script>
